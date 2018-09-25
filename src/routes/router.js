@@ -3,7 +3,7 @@ const mainRoute = require('./main/main');
 
 const router = {  
   '/products': allProducts,
-  '/me': mainRoute,
+  '/^[0-9]{0}$': mainRoute, // использовать регулярку для имени свойства?
   default: mainRoute
 };
 

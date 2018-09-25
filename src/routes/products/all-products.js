@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const motocycleRoute = (request, response) => {
+const allProducts = (request, response) => {
   const filePath = path.join(__dirname, '../../../', 'products', 'all-products.json');
   
   response.writeHead(200, {
@@ -12,4 +12,4 @@ const motocycleRoute = (request, response) => {
   readStream.pipe(response);
 };
 
-module.exports = motocycleRoute;
+module.exports = allProducts;
