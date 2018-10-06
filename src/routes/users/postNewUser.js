@@ -4,6 +4,7 @@ const path = require("path");
 const postNewUser = (request, response) => {
   let newUser = ''
   request.on("data", function(data) {
+    console.log(data)
     newUser = JSON.parse(data);
     const obj = JSON.parse(data);
     fs.writeFile(__dirname + `../../../../users/${obj.name}.json`, data, err => {

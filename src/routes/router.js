@@ -1,7 +1,7 @@
 const getAllProducts = require("./products/all-products");
 const getProduct = require("./products/getProdcts");
-const postNewUser = require('./users/postNewUser');
-const postNewProduct = require('./products/postNewProduct')
+const postNewUser = require("./users/postNewUser");
+const postNewProduct = require("./products/postNewProduct");
 const mainRoute = require("./main/main");
 
 const router = {
@@ -12,7 +12,7 @@ const router = {
     default: mainRoute
   },
   POST: {
-    '/products': postNewProduct,
+    "/products": postNewProduct,
     "/users": postNewUser,
     "/me": mainRoute,
     default: mainRoute
