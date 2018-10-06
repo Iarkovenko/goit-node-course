@@ -1,6 +1,6 @@
 const mainRoute = (request, response) => {
     response.writeHead(200, {"Content-Type": "text/html"});
-    response.write("<h1>hello!</h1>");
+    response.write("<h1>Првиет!</h1>");
     response.end();
   };
   
