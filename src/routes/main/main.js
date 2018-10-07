@@ -1,14 +1,9 @@
-const fs = require('fs');
-const path = require('path');
-
 const mainRoute = (request, response) => {
-  const filePath = path.join(__dirname, '../../../', 'products', 'all-products.json');
-
   response.writeHead(200, {
-    'Content-Type': 'application/json',
+    "Content-Type": "text/html"
   });
-  const readStream = fs.createReadStream(filePath);
-  readStream.pipe(response);
+  response.write("<h1>Привет!</h1>");
+  response.end();
 };
 
 module.exports = mainRoute;

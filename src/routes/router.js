@@ -1,9 +1,13 @@
 const allProducts = require('./products/all-products');
-const mainRoute = require('./main/main');
+// const createUser = require('./users/createUser')
+// const getProductItem = require('./products/getProductItem')
+const mainRoute = require('./main/main')
 
-const router = {  
+const router = {
   '/products': allProducts,
-  '/^[0-9]{0}$': mainRoute, // использовать регулярку для имени свойства?
+  // '/users/create': createUser,
+  // '/products/19112831': getProductItem,
+  
   default: mainRoute
 };
 
