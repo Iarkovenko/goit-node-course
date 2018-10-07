@@ -1,14 +1,22 @@
-const allProducts = require('./products/all-products');
-// const createUser = require('./users/createUser')
-// const getProductItem = require('./products/getProductItem')
-const mainRoute = require('./main/main')
+const getAllProducts = require("./products/all-products");
+const getProduct = require("./products/getProdcts");
+const postNewUser = require("./users/postNewUser");
+const postNewProduct = require("./products/postNewProduct");
+const mainRoute = require("./main/main");
 
 const router = {
-  '/products': allProducts,
-  // '/users/create': createUser,
-  // '/products/19112831': getProductItem,
-  
-  default: mainRoute
+  GET: {
+    "/products": getAllProducts,
+    "/product/19112831": getProduct,
+    "/me": mainRoute,
+    default: mainRoute
+  },
+  POST: {
+    "/products": postNewProduct,
+    "/users": postNewUser,
+    "/me": mainRoute,
+    default: mainRoute
+  }
 };
 
 module.exports = router;
