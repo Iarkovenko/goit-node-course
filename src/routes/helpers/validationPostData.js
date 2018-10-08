@@ -1,5 +1,6 @@
-const validateProductPostData = (incomingObj) => {
-    const keydefaultObj = ["name", "description", "price", "currency", "categories"];
+const validateProductPostData = (keydefaultObj,incomingObj) => {
+    // keydefaultObj its Array
+    // const keydefaultObj = ["name", "description", "price", "currency", "categories"];
     const keyincomingObj = Object.keys(incomingObj);
     let arr = [];
     keydefaultObj.forEach(keydefault => {

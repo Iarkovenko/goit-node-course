@@ -1,36 +1,40 @@
 const fs = require("fs");
-const path = require("path");
-const validateRequsetdata = require("../helpers/validationPostData")
+const shortId = require("shortid");
+const validationPostData = require("../helpers/validationPostData");
 
 const postNewProduct = (request, response) => {
-  var newProduct = '';
-  let missingKeys = '';
-  request.on("data", function (data) {
-    const check = validateRequsetdata(JSON.parse(data));
-    
+  var requireFiled = ["name", "description", "price", "currency", "categories"];
+  var newProduct = "";
+  var missingCategory = "";
+  request.on("data", function(data) {
+    const check = validationPostData(requireFiled, JSON.parse(data));
     if (check.length !== 0) {
-      missingKeys = check;
+      missingCategory = check;
     } else {
-      const obj = JSON.parse(data);
       newProduct = JSON.parse(data);
+      const obj = JSON.parse(data);
+      obj.id = shortId();
       fs.writeFile(
         __dirname + `../../../../products/${obj.id}.json`,
-        data,
+        JSON.stringify(obj),
         err => {
           if (err) throw err;
           console.log("Saved!");
         }
       );
     }
-
   });
 
-  request.on("end", function () {
-    if (missingKeys.length !== 0) {
+  request.on("end", function() {
+    if (missingCategory.length !== 0) {
       response.writeHead(424, {
         "Content-Type": "text/html"
       });
-      response.write("ERROR Your are missing the next field" + ' ' + missingKeys.join(', '));
+      response.write(
+        "ERROR You are missing the next fields:" +
+          " " +
+          missingCategory.join(" ")
+      );
       response.end();
     } else {
       response.writeHead(200, {
@@ -50,7 +54,6 @@ const postNewProduct = (request, response) => {
       );
       response.end();
     }
-
   });
 };
 
