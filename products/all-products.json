@@ -1,0 +1,24 @@
+[{
+	"id": 19112831,
+	"sku": 1120001,
+	"name": "Квартира",
+	"description": "Хорошая квартира в центре города",
+	"price": "20000",
+	"currency": "USD",
+	"creatorId": 1,
+	"created": "21-08-2018",
+	"modified": "21-08-2018",
+	"categories": ["house", "rent"]	
+},
+{
+	"id": 19112832,
+	"sku": 1120002,
+	"name": "Автомобиль",
+	"description": "Хорошая автомобиль. Почти новый",
+	"price": "10000",
+	"currency": "USD",
+	"creatorId": 1,
+	"created": "21-08-2018",
+	"modified": "21-08-2018",
+	"categories": ["vehicle", "car"]
+}]
