@@ -1,3 +1,5 @@
+const express = require('express');
+
 const getAllProducts = require("./products/all-products");
 const getProduct = require("./products/getProdcts");
 const postNewUser = require("./users/postNewUser");
@@ -6,21 +8,19 @@ const postNewCategories = require("./categoires/postNewCategories")
 const postNewImages = require("./images/postNewImages")
 const mainRoute = require("./main/main");
 
-const router = {
-  GET: {
-    "/products": getAllProducts,
-    "/product/19112831": getProduct,
-    "/me": mainRoute,
-    default: mainRoute
-  },
-  POST: {
-    "/images": postNewImages,
-    "/categories": postNewCategories,
-    "/products": postNewProduct,
-    "/users": postNewUser,
-    "/me": mainRoute,
-    default: mainRoute
-  }
-};
+const apiRoutes = express.Router();
 
-module.exports = router;
+// const middlewear
+
+apiRoutes
+  .get('/' || '/me', mainRoute)
+  .get('/products', getAllProducts)
+  .get('/product/:id', getProduct)
+
+  .post('/images', postNewImages)
+  .post('/categories', postNewCategories)
+  .post('/product', postNewProduct)
+  .post('/user', postNewUser)
+  // .post('/' || '/me', )
+
+module.exports = apiRoutes;

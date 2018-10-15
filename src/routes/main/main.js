@@ -1,7 +1,6 @@
 const mainRoute = (request, response) => {
-    response.writeHead(200, {"Content-Type": "text/html"});
-    response.write("<h1>Првиет!</h1>");
-    response.end();
+    response.set(200, {"Content-Type": "text/html"});
+    response.send("<h1>Првиет!</h1>");
   };
   
   module.exports = mainRoute;

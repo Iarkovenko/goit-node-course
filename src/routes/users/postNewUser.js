@@ -1,57 +1,48 @@
 const fs = require("fs");
 const shortId = require("shortid");
-const validationPostData = require("../helpers/validationPostData");
+const util = require("util");
+// const validationPostData = require("../helpers/validationPostData");
+
+const userFolder = "../../../../data/users";
+
+const writeFile = util.promisify(fs.writeFile);
+
+const saveNewUser = (filename, data) => {
+  const src = `${userFolder}/${filename}.json`;
+  const dataStr = JSON.stringify(data);
+  return writeFile(__dirname + src, dataStr);
+};
 
 const postNewUser = (request, response) => {
-  var requireFiled = ["name", "phone", "password"];
-  let newUser = "";
-  var missingCategory = "";
-  request.on("data", function(data) {
-    const check = validationPostData(requireFiled, JSON.parse(data));
-    if (check.length !== 0) {
-      missingCategory = check;
-    } else {
-      newUser = JSON.parse(data);
-      const obj = JSON.parse(data);
-      obj.id = shortId();
-      fs.writeFile(
-        __dirname + `../../../../users/${obj.name}.json`,
-        JSON.stringify(obj),
-        err => { 
-          if (err) throw err;
-          console.log("Saved!");
-        }
-      );
-    }
-  });
+  const user = request.body;
 
-  request.on("end", function() {
-    if (missingCategory.length !== 0) {
-      response.writeHead(424, {
-        "Content-Type": "text/html"
-      });
-      response.write(
-        "ERROR You are missing the next fields:" +
-          " " +
-          missingCategory.join(" ")
-      );
-      response.end();
-    } else {
-      response.writeHead(200, {
-        "Content-Type": "text/html"
-      });
-      response.write(
-        JSON.stringify({
-          status: "success",
-          user: {
-            name: newUser.name,
-            phone: newUser.phone
-          }
-        })
-      );
-      response.end();
-    }
-  });
+  const userData = Object.assign({}, user, { id: shortId() });
+  
+  const fileName = userData.name.toLowerCase() + "___" + userData.id;
+
+  const sendResponse = () => {
+    response.json({
+      status: "success",
+      user: {
+        userName: userData.name,
+        password: userData.password,
+        tel: userData.phone,
+        id: userData.id
+      }
+    });
+  };
+
+  const sendError = () => {
+    response.status(400);
+    response.json({
+      error: 'user was not saved'
+    });
+  };
+
+  saveNewUser(fileName, userData)
+    .then(sendResponse)
+    .catch(sendError);
+
 };
 
 module.exports = postNewUser;
