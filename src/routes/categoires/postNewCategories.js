@@ -2,20 +2,20 @@ const fs = require("fs");
 const shortId = require("shortid");
 const validationPostData = require("../helpers/validationPostData");
 
-const postNewProduct = (request, response) => {
-  var requireFiled = ["name", "description", "price", "currency", "categories"];
-  var newProduct = "";
+const postNewCategories = (request, response) => {
+  var requireFiled = ["name", "description"];
+  let newCategory = "";
   var missingCategory = "";
   request.on("data", function(data) {
     const check = validationPostData(requireFiled, JSON.parse(data));
     if (check.length !== 0) {
       missingCategory = check;
     } else {
-      newProduct = JSON.parse(data);
+      newCategory = JSON.parse(data);
       const obj = JSON.parse(data);
       obj.id = shortId();
       fs.writeFile(
-        __dirname + `../../../../products/${obj.id}.json`,
+        __dirname + `../../../../data/categories/${obj.name}.json`,
         JSON.stringify(obj),
         err => {
           if (err) throw err;
@@ -43,12 +43,9 @@ const postNewProduct = (request, response) => {
       response.write(
         JSON.stringify({
           status: "success",
-          product: {
-            name: newProduct.name,
-            description: newProduct.description,
-            price: newProduct.price,
-            currency: newProduct.currency,
-            categories: newProduct.categories
+          category: {
+            name: newCategory.name,
+            description: newCategory.description
           }
         })
       );
@@ -57,4 +54,4 @@ const postNewProduct = (request, response) => {
   });
 };
 
-module.exports = postNewProduct;
+module.exports = postNewCategories;

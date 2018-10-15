@@ -1,31 +1,48 @@
 const fs = require("fs");
-const path = require("path");
+const shortId = require("shortid");
+const util = require("util");
+// const validationPostData = require("../helpers/validationPostData");
+
+const userFolder = "../../../../data/users";
+
+const writeFile = util.promisify(fs.writeFile);
+
+const saveNewUser = (filename, data) => {
+  const src = `${userFolder}/${filename}.json`;
+  const dataStr = JSON.stringify(data);
+  return writeFile(__dirname + src, dataStr);
+};
 
 const postNewUser = (request, response) => {
-  let newUser = ''
-  request.on("data", function(data) {
-    console.log(data)
-    newUser = JSON.parse(data);
-    const obj = JSON.parse(data);
-    fs.writeFile(__dirname + `../../../../users/${obj.name}.json`, data, err => {
-      if (err) throw err;
-      console.log("Saved!");
-    });
-  });
+  const user = request.body;
 
-  request.on("end", function() {
-    response.writeHead(200, {
-      "Content-Type": "text/html"
-    });
-    response.write(JSON.stringify({
-      'status': "success",
-      'user': {
-        "name": newUser.name,
-        "phone": newUser.phone,
+  const userData = Object.assign({}, user, { id: shortId() });
+  
+  const fileName = userData.name.toLowerCase() + "___" + userData.id;
+
+  const sendResponse = () => {
+    response.json({
+      status: "success",
+      user: {
+        userName: userData.name,
+        password: userData.password,
+        tel: userData.phone,
+        id: userData.id
       }
-    }));
-    response.end();
-  });
+    });
+  };
+
+  const sendError = () => {
+    response.status(400);
+    response.json({
+      error: 'user was not saved'
+    });
+  };
+
+  saveNewUser(fileName, userData)
+    .then(sendResponse)
+    .catch(sendError);
+
 };
 
 module.exports = postNewUser;

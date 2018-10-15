@@ -1,0 +1,7 @@
+{
+	"name": "avto",
+ "description": "its a good car",
+ "price": "20000",
+ "currency": "USD",
+ "categories": ["car", "sell"]
+}
