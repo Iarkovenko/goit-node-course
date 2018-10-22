@@ -1,24 +1,21 @@
-const fs = require("fs");
+const fs = require("fs")
 
 const getUser = (request, response) => {
-  const id = request.params.id;
+    const id = request.params.id;
+    const fileDB = fs.readFileSync(__dirname + '../../../../data/users/all-users.json', 'utf8');
+    const DB = JSON.parse(fileDB);
+    const getUserById = DB.find(user => user.id === id);
+    if (!getUserById) {
+        response.set("Content-Type", "text/html");
+  
+        response.status(404);
+        response.send('Not FInd');
+    }
     
-
-//     const appendNewuser = (data) => {
-//     fs.open("../../../../data/users/all-users.json", 'w');
-    
-//   }
-  response.set("Content-Type", "application/json");
-  response.status(200);
-  response.json({ userId: id });
+    response.set("Content-Type", "application/json");
+  
+    response.status(200);
+    response.json(getUserById);
 }
 
 module.exports = getUser;
-
-/**
- * 
- * const filePath = path.join(__dirname, '../../../', 'products', 'all-products.json');
-  const obj = JSON.parse(fs.readFileSync(filePath, 'utf8'))
-  const artcile = obj.find(item => item.id === 19112831)
-
- */
