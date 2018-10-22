@@ -6,6 +6,7 @@ const postNewProduct = (request, response) => {
   var requireFiled = ["name", "description", "price", "currency", "categories"];
   var newProduct = "";
   var missingCategory = "";
+  
   request.on("data", function(data) {
     const check = validationPostData(requireFiled, JSON.parse(data));
     if (check.length !== 0) {
