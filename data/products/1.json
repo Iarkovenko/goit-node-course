@@ -1,7 +1,0 @@
-{
- "id": "1",
- "description": "Хорошая квартира в центре города",
- "price": "20000",
- "currency": "USD",
- "categories": ["house", "rent"]
-}
