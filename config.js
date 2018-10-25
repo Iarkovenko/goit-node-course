@@ -1,5 +1,5 @@
-const dbUser = "Iarkovenko";
-const dbPassword = "Ys8f77qM";
+const dbUser = "admin";
+const dbPassword = "qwerty12345";
 
 const config = {
   port: 8080,

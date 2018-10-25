@@ -8,7 +8,10 @@ const userSchema = new Schema({
   nickName: String,
   location: String,
   password: String,
-  email: String
+  email: String,
+  favoriteCategories: Array,
+  products: Array,
+  viewedProducts: Array
 });
 
 const User = mongoose.model('User', userSchema);

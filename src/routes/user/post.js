@@ -1,8 +1,13 @@
-const User = require("../../db/schemas/user")
+const User = require("../../db/schemas/user");
+const bcrypt = require('bcrypt')
 
 const createUser = (request, response) => {
     const user = request.body;
-    const userData = Object.assign({}, user)
+
+    const hashedPassword =  bcrypt.hashSync(user.password, 10);
+    const userData = Object.assign({}, user, {
+        password: hashedPassword
+      })
 
     const newUser = new User(userData);
 
