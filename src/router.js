@@ -1,5 +1,8 @@
 const express = require('express');
 
+const auth = require('./../modules/auth')
+const verifyToken = require('./../modules/verifyToken')
+
 const postUser = require('./user/post')
 const postProduct = require('./product/post')
 
@@ -15,6 +18,8 @@ const updateProduct = require('./product/update')
 const apiRoutes = express.Router();
 
 apiRoutes
+  .post('/authenticate', auth)
+  .use(verifyToken)
   .post('/user', postUser)
   .post('/product', postProduct)
 

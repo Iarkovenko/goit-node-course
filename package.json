@@ -17,8 +17,6 @@
     "mongoose": "^5.3.6",
     "morgan": "^1.9.1",
     "multer": "^1.4.1",
-    "nodemon": "^1.18.4",
-    "short-id": "0.1.0-1",
-    "shortid": "^2.2.13"
+    "nodemon": "^1.18.4"
   }
 }

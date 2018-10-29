@@ -1,7 +1,7 @@
 const bodeParser = require('body-parser');
 const app = require('./modules/app')
 const morgan = require("morgan");
-const router = require("./routes/router");
+const router = require("./router");
 
 const errorHandler = (err, req, res) => {
   console.log(err.stack);
@@ -23,3 +23,4 @@ const startServer = port => {
 }
 
 module.exports = startServer;
+
