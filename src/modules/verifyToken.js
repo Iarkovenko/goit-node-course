@@ -1,4 +1,4 @@
-const app = require('../modules/app');
+const app = require('./app');
 const jwt = require('jsonwebtoken');
 
 const getToken = req => req.body.token || req.query.token || req.headers['x-access-token'];

@@ -1,4 +1,4 @@
-const User = require("../../db/schemas/user");
+const User = require("../../models/user");
 const bcrypt = require('bcrypt')
 
 const createUser = (request, response) => {

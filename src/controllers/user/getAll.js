@@ -1,4 +1,4 @@
-const User = require("../../db/schemas/user");
+const User = require("../../models/user");
 
 const getAllUser = (req, res) => {
     const sendResponse = (user) => {

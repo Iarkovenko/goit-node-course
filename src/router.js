@@ -1,19 +1,19 @@
 const express = require('express');
 
-const auth = require('./../modules/auth')
-const verifyToken = require('./../modules/verifyToken')
+const auth = require('./controllers/auth')
+const verifyToken = require('./controllers/verifyToken')
 
-const postUser = require('./user/post')
-const postProduct = require('./product/post')
+const postUser = require('./controllers/user/post')
+const postProduct = require('./controllers/product/post')
 
-const deleteUser = require('./user/delete')
+const deleteUser = require('./controllers/user/delete')
 
-const getAllUsers = require('./user/getAll')
-const getUser = require('./user/get')
-const getProduct = require('./product/get')
+const getAllUsers = require('./controllers/user/getAll')
+const getUser = require('./controllers/user/get')
+const getProduct = require('./controllers/product/get')
 
-const updateUser = require('./user/update')
-const updateProduct = require('./product/update')
+const updateUser = require('./controllers/user/update')
+const updateProduct = require('./controllers/product/update')
 
 const apiRoutes = express.Router();
 

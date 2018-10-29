@@ -1,4 +1,4 @@
-const Product = require("../../db/schemas/product");
+const Product = require("../../models/product");
 
 const createProduct = (request, response) => {
     const product = request.body;
