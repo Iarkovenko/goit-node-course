@@ -3,16 +3,19 @@ const Product = require("../../models/product");
 const createProduct = (request, response) => {
     const product = request.body;
 
-    const productData = Object.assign({}, product)
+    const productData = Object.assign( {}, product, 
+        { seller: request.headers['x-seller-auth'] } 
+    )
 
     const newProduct = new Product(productData);
 
-    const sendResponse = (product) => {
+    const sendResponse = (productData) => {
         response.json({
             status: "success",
-            product
+            productData
         })
     }
+
     const sendError = () => {
         response.status(400);
         response.json({

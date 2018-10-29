@@ -1,35 +1,38 @@
-const express = require('express');
+const express = require("express");
 
-const auth = require('./controllers/auth')
-const verifyToken = require('./controllers/verifyToken')
+const auth = require("./controllers/auth");
+const verifyToken = require("./controllers/verifyToken");
 
-const postUser = require('./controllers/user/post')
-const postProduct = require('./controllers/product/post')
+const postUser = require("./controllers/user/post");
+const postProduct = require("./controllers/product/post");
 
-const deleteUser = require('./controllers/user/delete')
+const deleteUser = require("./controllers/user/delete");
 
-const getAllUsers = require('./controllers/user/getAll')
-const getUser = require('./controllers/user/get')
-const getProduct = require('./controllers/product/get')
+const getAllUsers = require("./controllers/user/getAll");
+const getUser = require("./controllers/user/get");
+const getProduct = require("./controllers/product/get");
+const getProductByParam = require('./controllers/product/getByParam')
 
-const updateUser = require('./controllers/user/update')
-const updateProduct = require('./controllers/product/update')
+const updateUser = require("./controllers/user/update");
+const updateProduct = require("./controllers/product/update");
 
 const apiRoutes = express.Router();
 
 apiRoutes
-  .post('/authenticate', auth)
-  .use(verifyToken)
-  .post('/user', postUser)
-  .post('/product', postProduct)
+  .post("/user/sign-up", postUser)
+  .post("/login", auth)
 
-  .delete('/user/:id', deleteUser)
+  // .use(verifyToken)
+  .post("/product", postProduct)
 
-  .get('/users', getAllUsers)
-  .get('/user/:id', getUser)
-  .get('/product/:id', getProduct)
+  .delete("/user/:id", deleteUser)
 
-  .put('/user/:id', updateUser)
-  .put('/product/:id', updateProduct)
-  
+  .get("/users", getAllUsers)
+  .get("/user/:id", getUser)
+  .get("/product/:id", getProduct)
+  .get('products/search', updateProduct)
+
+  .put("/user/:id", updateUser)
+  .put("/product/:id", updateProduct);
+
 module.exports = apiRoutes;

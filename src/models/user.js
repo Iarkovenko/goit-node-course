@@ -2,12 +2,19 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const userSchema = new Schema({
+  userName: {
+    type: String,
+    required: true
+  },
   firstName: String,
   lastName: String,
   telephone: String,
-  nickName: String,
   location: String,
-  password: String,
+  password: {
+    type: String,
+    required: true,
+    select: false
+  },
   email: String,
   favoriteCategories: Array,
   products: Array,

@@ -2,6 +2,7 @@ const bodeParser = require('body-parser');
 const app = require('./modules/app')
 const morgan = require("morgan");
 const router = require("./router");
+const config = require('../config')
 
 const errorHandler = (err, req, res) => {
   console.log(err.stack);
@@ -11,6 +12,7 @@ const errorHandler = (err, req, res) => {
 
 const startServer = port => {
   app
+  .set('superSecret', config.secret)
   .use(bodeParser.urlencoded({extended: false}))
   .use(bodeParser.json())
   .use(morgan('dev'))

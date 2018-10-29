@@ -11,8 +11,8 @@ const productSchema = new Schema({
     raiting: Number,
     likes: Number,
     forSale: Boolean,
-    buyer: Number,
-    seller: Number
+    buyer: String,
+    seller: String
 });
 
 const Product = mongoose.model('Product', productSchema);
